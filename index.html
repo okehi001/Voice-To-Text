@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speech-to-Text | AbdulBasit</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-glow"></div>
+
+    <div class="container">
+      <header>
+        <div class="header-main">
+          <h1>Speech-to-Text</h1>
+          <label class="theme-switch" title="Toggle Dark Mode">
+            <input type="checkbox" id="darkToggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <p class="subtitle">AI-Powered Transcription • AbdulBasit</p>
+      </header>
+
+      <main class="glass-card">
+        <!-- Audio Quality Tip Banner -->
+        <div class="tip-banner" id="tipBanner">
+          <i data-lucide="info"></i>
+          <span
+            >For best results: speak clearly, reduce background noise, and stay
+            close to the mic.</span
+          >
+          <button
+            onclick="document.getElementById('tipBanner').remove()"
+            class="tip-close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <section class="settings">
+          <div class="settings-row">
+            <div class="field">
+              <label for="language">Source Language</label>
+              <select id="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="ha">Hausa</option>
+                <option value="yo">Yoruba</option>
+                <option value="ig">Igbo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="modelSelect">Accuracy Level</label>
+              <select id="modelSelect">
+                <option value="base">Base (Balanced)</option>
+                <option value="small">Small (Better)</option>
+                <option value="medium">Medium (Best)</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mic Level Meter -->
+        <div class="mic-meter-wrap hidden" id="micMeterWrap">
+          <label class="field-label">Mic Level</label>
+          <div class="mic-meter-bar">
+            <div class="mic-meter-fill" id="micMeterFill"></div>
+          </div>
+          <span class="mic-label" id="micLabel">Waiting...</span>
+        </div>
+
+        <section class="controls-grid">
+          <button id="recordBtn" class="btn btn-primary">
+            <i data-lucide="mic"></i>
+            <span>Start Recording</span>
+          </button>
+          <button id="stopBtn" class="btn btn-danger" disabled>
+            <i data-lucide="square"></i>
+            <span>Stop</span>
+          </button>
+        </section>
+
+        <div class="divider"><span>OR</span></div>
+
+        <section class="upload-area">
+          <label for="fileInput" class="drop-zone" id="dropZone">
+            <i data-lucide="upload-cloud"></i>
+            <p>Click or drag & drop an audio file</p>
+            <span class="drop-sub">Supports MP3, WAV, M4A, OGG, WEBM</span>
+            <input type="file" id="fileInput" accept="audio/*" hidden />
+          </label>
+        </section>
+
+        <div class="visualizer-container">
+          <div id="waveform"></div>
+          <audio id="audioPlayer" controls class="hidden"></audio>
+        </div>
+
+        <div id="spinner" class="hidden">
+          <div class="loader"></div>
+          <p id="spinnerText">Analyzing audio...</p>
+        </div>
+
+        <div class="output-section">
+          <div class="output-header">
+            <h3>Transcription</h3>
+            <div class="output-actions">
+              <button
+                id="copyBtn"
+                class="action-link hidden"
+                title="Copy to clipboard"
+              >
+                <i data-lucide="copy"></i> Copy
+              </button>
+              <a id="downloadBtn" class="action-link hidden" href="#">
+                <i data-lucide="download"></i> Download
+              </a>
+            </div>
+          </div>
+          <div class="transcript-display">
+            <p id="transcript">Ready for input...</p>
+          </div>
+          <div id="detectedLang" class="detected-lang hidden"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="script.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
